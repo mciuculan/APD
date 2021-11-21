@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <pthread.h>
 #include "genetic_algorithm_par.h"
 
 int main(int argc, char *argv[]) {
@@ -21,9 +22,26 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 
-	run_genetic_algorithm(objects, object_count, generations_count, sack_capacity);
+	pthread_t tid[number_of_threads];
+	pthread_barrier_t barrier;
+    pthread_barrier_init(&barrier, NULL, number_of_threads);
 
-	free(objects);
+    globals **global = malloc(sizeof(globals *) * number_of_threads);
+	for (int i = 0; i < number_of_threads; i++) {
+		global[i] = init(&barrier, i, number_of_threads, objects, object_count, sack_capacity, generations_count);
+	}
 
-	return 0;
+	for (int i = 0; i < number_of_threads; i++) {
+		pthread_create(&tid[i], NULL, run_genetic_algorithm, (void *)global[i]);
+	}
+
+	for (int i = 0; i < number_of_threads; i++) {
+		pthread_join(tid[i], NULL);
+	}
+
+	pthread_barrier_destroy(&barrier);
+
+    free(objects);
+
+    return 0;
 }

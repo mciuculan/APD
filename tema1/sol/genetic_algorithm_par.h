@@ -3,6 +3,14 @@
 
 #include "sack_object_par.h"
 #include "individual_par.h"
+#include "globals.h"
+
+// init auxilliary struct
+globals *init(  pthread_barrier_t *barrier, int thread_id, int no_of_threads,
+                const sack_object *objects,
+                int object_count,
+                int sack_capacity,
+				int generations_count);
 
 // reads input from a given file
 int read_input(sack_object **objects, int *object_count, int *sack_capacity, int *generations_count, int *number_of_threads, int argc, char *argv[]);
@@ -38,6 +46,6 @@ void copy_individual(const individual *from, const individual *to);
 void free_generation(individual *generation);
 
 // runs the genetic algorithm
-void run_genetic_algorithm(const sack_object *objects, int object_count, int generations_count, int sack_capacity);
+void *run_genetic_algorithm(void *arg);
 
 #endif
