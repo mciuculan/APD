@@ -1,0 +1,27 @@
+Ciuculan Maria-Cristiana
+333CC
+
+						README
+
+In primul rand, se poate observa faptul ca in functia compute_fitness_function si in cmpfunction
+este un for identic. Motiv pentru care, in structura pentru individual am adaugat un camp
+nr_obj in care precalculez numarul de obiecte continute de individ in generatia respectiva si 
+am putut sa evit folosirea unuia dintre for-uri.
+
+In plus, variabila cursor este inutila. In ea se cumuleaza count-ul, lucru care se poate face direct
+in apelarea functiilor.
+
+Un alt lucru care se repeta era calcularea a 30% si 20% din object_count, motiv pentru care am
+adaugat 2 variabile, count1 si count2, in care calculez o singura data, la inceputul functiei, numarul
+dorit.
+
+Am paralelizat for-ul in care se pastreaza primii 30% insa nu am reusit sa paralelizez urmatoarele 2
+for-uri.
+
+Am observat ca pot face crossover in functie de paritate, in loc sa decrementez count1, pur si simplu
+merg cu un pas in urma la crossover in cazul in care este impar. daca este par, il las cum a fost initial.
+
+Am paralelizat, de asemenea, initializarea generatiei. In plus, functia de compute fitness a mers
+paralelizata, dar cu calcul diferit fata de cum calculam de obicei start-ul si end-ul (inca sunt confuza
+de ce fara ceil nu imi functiona).
+
