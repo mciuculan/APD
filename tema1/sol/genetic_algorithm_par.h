@@ -10,10 +10,13 @@ globals *init(  pthread_barrier_t *barrier, int thread_id, int no_of_threads,
                 const sack_object *objects,
                 int object_count,
                 int sack_capacity,
-				int generations_count);
+				int generations_count,
+                individual *current_generation,
+                individual *next_generation);
 
 // reads input from a given file
-int read_input(sack_object **objects, int *object_count, int *sack_capacity, int *generations_count, int *number_of_threads, int argc, char *argv[]);
+int read_input(sack_object **objects, int *object_count, int *sack_capacity, int *generations_count,
+                                        int *number_of_threads, int argc, char *argv[]);
 
 // displays all the objects that can be placed in the sack
 void print_objects(const sack_object *objects, int object_count);
@@ -25,7 +28,8 @@ void print_generation(const individual *generation, int limit);
 void print_best_fitness(const individual *generation);
 
 // computes the fitness function for each individual in a generation
-void compute_fitness_function(const sack_object *objects, individual *generation, int object_count, int sack_capacity);
+void compute_fitness_function(const sack_object *objects, individual *generation, int object_count,
+                                        int sack_capacity, globals thread);
 
 // compares two individuals by fitness and then number of objects in the sack (to be used with qsort)
 int cmpfunc(const void *a, const void *b);

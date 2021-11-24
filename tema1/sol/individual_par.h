@@ -8,6 +8,7 @@ typedef struct _individual {
 	int *chromosomes;
     int chromosome_length;
 	int index;
+	int nr_obj;
 } individual;
 
 #endif
