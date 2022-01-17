@@ -1,0 +1,6 @@
+10
+4
+tests/files/in1
+tests/files/in2
+tests/files/in3
+tests/files/in4.txt
