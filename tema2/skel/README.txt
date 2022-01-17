@@ -21,3 +21,6 @@ Apoi, pentru fiecare dictionar din lista comuna, pun cate un worker sa calculeze
 rangurile, sa caute lungimile maximale si frecventele corespunzatoare pentru
 acestea.
 Apoi, sortez rezultatele finale descrescator dupa rangul lor si le printez.
+
+* se pierd un numar foarte mic de cuvinte, motiv pentru care rezultatele finale
+au diferente de 0.01, 0.02, fata de rezultatele corecte.
