@@ -1,6 +1,7 @@
 Ciuculan Maria
 333 CC
 			Tema 2
+		Paradigma Map-Reduce
 
 Pentru inceput, citesc fisierul initial. Am creat solutiile partiale din executor service
 intr-o lista concurenta pentru a nu se suprapune solutiile. Impart fiecare fisier in
