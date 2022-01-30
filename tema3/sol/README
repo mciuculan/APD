@@ -1,0 +1,35 @@
+Ciuculan Maria-Cristiana                                                333CC
+                                        Tema 3
+
+    Rezolvarea temei incepe prin citirea argumentelor si initializarea workerilor.
+In aceasta rezolvare, voi utiliza tag-urile 0, 1, 2 pentru prima cerinta reprezentand
+leader-ul 0, respectiv 1 si 2. Pentru bonus am adaugat si un tag 20 care sa
+semnifice primirea de la clusterul 1 pe 2 catre 0. Nu sunt sigura daca era absolut
+necesar, insa a parut sa imi rezolve anumite erori.
+    Pentru inceput, fiecare leader isi citeste din fisierul corespunzator topologia.
+Pe leader 0, daca nu exista eroare de comunicatie, trimite topologia catre cluster-ul 1,
+neexistand restrictii pentru trimiterea catre cluster-ul 2. De asemenea, daca nu exista
+eroare de comunicatie, primeste topologia 1 de la 1. Altfel, o asteapta de la 2. Tot de
+la 2 va primi si topologia 2.
+    Atunci cand a primit toate topologiile, isi anunta workerii ca el este leader si ca
+in topologie se afla un numar de workeri, trimitand ulterior si lista de workeri. Apoi
+le trimite topologia 1 si topologia 2.
+    Dupa ce a terminat de trimis si primit topologiile, printeaza ce a aflat.
+    Asemanator lucreaza si ceilalti 2 lideri, singura diferenta fiind cum lucreaza in
+cazul erorii de comunicare dintre 1 si 0. 1 nu si va mai trimite topologia catre 0, doar
+catre 2, acesta fiind responsabil sa trimita informatia catre 0. De asemenea, el il
+anunta pe 1 si de topologia lui 0.
+    Workerii nu sunt afectati de eroarea de comunicatie. Ei afla mai intai cine le este
+lider, apoi primesc pe rand cele 3 topologii si le printeaza.
+    Pentru taskul 2, leaderul 0 incearca sa echilibreze impartirea nr de calcule pentru 
+fiecare cluster in functie de numarul de workeri din fiecare. Ultimul cluster va
+primi mereu ceea ce ramane necalculat pana la finalul vectorului.
+    Dupa ce face impartirea pentru fiecare cluster, isi echilipreaza numarul de calcule
+pentru fiecare dintre proprii workeri si le trimite ce au de calculat. Intre timp,
+trimite si catre ceilalti leaderi partile lor. Daca exista eroare de comunicatie, va
+trebui sa trimita catre 2 atat ce are el de calculat cat si ce are 1. Apoi, creeaza un
+vector gol si asteapta solutiile. Va solutiile primi mai intai de la copiii sai, apoi 
+de la ceilalti coordonatori, le combina in vectorul final si le printeaza.
+    Ceilalti coordonatori primesc valorile de modificat (tinand cont si de erorile de
+comunicatie) si impart echilibrat catre copii. Apoi le strang si trimit astfel incat sa
+ajunga la 0 rezultatul (din nou, se tine cont de erorile de comunicare).
